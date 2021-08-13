@@ -3,6 +3,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
+const movies = require("./movies");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
@@ -50,7 +51,16 @@ function getAllMovieTitles(moviesArr) {
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+function getHighestMetascore(moviesArr) {
+  let highScore = 0;
+
+  for(let movie of moviesArr){
+    if(highScore < Number(movie.metascore)){
+      highScore = Number(movie.metascore);
+    }
+  }
+  return highScore;
+}
 
 /**
  * getAverageIMDBRating()
@@ -63,7 +73,17 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(moviesArr) {
+  let avgRating = 0;
+  if(!moviesArr.length){
+    return avgRating;
+  }
+  for(let movie of moviesArr){
+    avgRating += Number(movie.imdbRating);
+  }
+  avgRating /= moviesArr.length;
+  return avgRating;
+}
 
 /**
  * countByRating()
@@ -76,7 +96,31 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(moviesArr) {
+  let moviesObj = {};
+  if(!moviesArr.length){
+    return moviesObj;
+  }
+  let gCount = 0;
+  let pgCount = 0;
+  let pg13Count = 0;
+
+  for(let i = 0; i < moviesArr.length; i++){
+    moviesObj[moviesArr[i].rated] = 0; moviesObj["G"]
+      if('G' === moviesArr[i].rated){
+         gCount += 1;
+      } else if('PG' === moviesArr[i].rated){
+        pgCount += 1;
+      } else{
+        pg13Count += 1;
+      }
+  }
+  if(moviesObj['G']){
+    moviesObj['G'] = gCount;
+  }
+
+  return moviesObj;
+}
 
 /**
  * findById()
@@ -92,7 +136,19 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(moviesArr, id) {
+  let moviesObj = {};
+  if(!moviesArr.length){
+    return null;
+  }
+  for(let movie of moviesArr){
+    if(id === movie.imdbID){
+      return movie;
+    }
+  }
+  return null;
+}
+
 
 /**
  * filterByGenre()
@@ -114,7 +170,11 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(moviesObj, genre) {
+  
+
+  return genreArr;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
