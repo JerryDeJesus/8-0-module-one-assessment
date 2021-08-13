@@ -101,24 +101,21 @@ function countByRating(moviesArr) {
   if(!moviesArr.length){
     return moviesObj;
   }
-  let gCount = 0;
-  let pgCount = 0;
-  let pg13Count = 0;
+  let grab = [];
 
   for(let i = 0; i < moviesArr.length; i++){
-    moviesObj[moviesArr[i].rated] = 0; moviesObj["G"]
-      if('G' === moviesArr[i].rated){
-         gCount += 1;
-      } else if('PG' === moviesArr[i].rated){
-        pgCount += 1;
-      } else{
-        pg13Count += 1;
-      }
+    grab.push(moviesArr[i].rated);
+    moviesObj[moviesArr[i].rated] = 0;
   }
-  if(moviesObj['G']){
-    moviesObj['G'] = gCount;
+  for(let j = 0; j < grab.length; j++){
+    if(grab[j] === 'G'){
+      moviesObj["G"] += 1;
+    }else if(grab[j] === 'PG'){
+      moviesObj["PG"] += 1;
+    } else if(grab[j] === 'PG-13'){
+      moviesObj["PG-13"] += 1;
+    }
   }
-
   return moviesObj;
 }
 
@@ -171,8 +168,17 @@ function findById(moviesArr, id) {
  *  //> []
  */
 function filterByGenre(moviesObj, genre) {
-  
 
+  function capitalize(string){
+    return string[0].toUpperCase() + string.slice(1).toLowerCase();
+  }
+
+  let genreArr = [];
+  for(let movie of moviesObj){
+    if(movie.genre.includes(capitalize(genre))){
+      genreArr.push(movie);
+    }
+  }
   return genreArr;
 }
 
@@ -198,7 +204,9 @@ function filterByGenre(moviesObj, genre) {
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(moviesArr, year) {
+  
+}
 
 /**
  * getBiggestBoxOfficeMovie()
