@@ -227,7 +227,8 @@ function getAllMoviesReleasedAtOrBeforeYear(moviesArr, year) {
  */
 function getBiggestBoxOfficeMovie(moviesArr) {
   function moneyFormatter(money){
-    let formattedMoney = money.replaceAll(',','');
+    let formattedMoney = money.replace(',','');
+    formattedMoney = formattedMoney.replace(',','');
     formattedMoney = Number(formattedMoney.replace('$',''));
     return formattedMoney;
   }
