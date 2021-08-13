@@ -225,7 +225,30 @@ function getAllMoviesReleasedAtOrBeforeYear(moviesArr, year) {
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie(moviesArr) {
+  function moneyFormatter(money){
+    let formattedMoney = money.replaceAll(',','');
+    formattedMoney = Number(formattedMoney.replace('$',''));
+    return formattedMoney;
+  }
+  
+  let moneyMovie = {};
+  let mostProfit = 0;
+  if(!moviesArr.length){
+    return null;
+  }
+  for(let i = 0; i < moviesArr.length; i++){
+    if(mostProfit <= moneyFormatter(moviesArr[i].boxOffice)){
+      mostProfit = moneyFormatter(moviesArr[i].boxOffice);
+    }
+  }
+  for(let movie of moviesArr){
+    if(mostProfit === moneyFormatter(movie.boxOffice)){
+      moneyMovie = movie.title;
+    }
+  }
+  return moneyMovie;
+}
 
 // Do not change anything below this line.
 module.exports = {
